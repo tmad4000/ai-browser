@@ -1,33 +1,42 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Text } from 'react-native';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
+        tabBarActiveTintColor: '#007AFF',
+        tabBarInactiveTintColor: '#8e8e93',
+        tabBarStyle: {
+          borderTopColor: '#e8e8e8',
+          backgroundColor: '#fafafa',
+        },
+        headerStyle: {
+          backgroundColor: '#fafafa',
+        },
+        headerShadowVisible: false,
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: 'Browser',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>&#x25CE;</Text>,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="prompts"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Prompts',
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>&#x270E;</Text>,
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: 'Settings',
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>&#x2699;</Text>,
         }}
       />
     </Tabs>

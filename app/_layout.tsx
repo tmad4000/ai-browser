@@ -1,24 +1,36 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+import { logger, installGlobalErrorHandler } from '../lib/logger';
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  useEffect(() => {
+    installGlobalErrorHandler();
+    logger.info('App started');
+  }, []);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <>
+      <StatusBar style="dark" />
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+        <Stack.Screen
+          name="prompt-editor"
+          options={{
+            presentation: 'modal',
+            title: 'Edit Prompt',
+            headerStyle: { backgroundColor: '#fafafa' },
+          }}
+        />
+        <Stack.Screen
+          name="schema-viewer"
+          options={{
+            presentation: 'modal',
+            title: 'Schema',
+            headerStyle: { backgroundColor: '#fafafa' },
+          }}
+        />
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    </>
   );
 }
