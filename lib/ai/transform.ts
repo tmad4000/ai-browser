@@ -23,6 +23,14 @@ export async function transformContent(
     // Find matching prompt for this URL
     const matchedPrompt = matchUrlToPrompt(extracted.url, sitePrompts);
 
+    // Unsupported pages should degrade to a raw preview instead of forcing article JSON.
+    if (!matchedPrompt && extracted.contentType === 'unknown') {
+      return {
+        success: false,
+        raw: buildRawPreview(extracted),
+      };
+    }
+
     // Check cache
     const contentHash = computeContentHash(extracted.content);
     const cacheKey = `${extracted.url}:${matchedPrompt?.id || 'default'}:${matchedPrompt?.version || 0}:${contentHash}`;
@@ -91,4 +99,20 @@ export async function transformContent(
       error: error instanceof Error ? error.message : 'Unknown transformation error',
     };
   }
+}
+
+function buildRawPreview(extracted: ExtractedContent): string {
+  const header = [`# ${extracted.title || 'Untitled Page'}`, '', `Source: ${extracted.url}`];
+  const metaEntries = Object.entries(extracted.meta || {}).slice(0, 5);
+  const metaSection = metaEntries.length > 0
+    ? ['', '## Metadata', ...metaEntries.map(([key, value]) => `- ${key}: ${value}`)]
+    : [];
+
+  return [
+    ...header,
+    ...metaSection,
+    '',
+    '## Extracted Content',
+    extracted.content || '_No extractable content found._',
+  ].join('\n');
 }

@@ -71,7 +71,9 @@ export const EXTRACTION_SCRIPT = `
 
     // Search engines
     const searchHosts = ['google.com', 'bing.com', 'duckduckgo.com', 'search.yahoo.com'];
-    if (searchHosts.some(h => hostname.includes(h)) && url.includes('search') || url.includes('?q=')) return 'search';
+    const isKnownSearchHost = searchHosts.some(function(h) { return hostname.includes(h); });
+    const looksLikeSearchUrl = url.includes('search') || url.includes('?q=');
+    if (isKnownSearchHost && looksLikeSearchUrl) return 'search';
 
     // Shopping
     const shopHosts = ['amazon.com', 'ebay.com', 'walmart.com', 'target.com', 'bestbuy.com', 'etsy.com'];

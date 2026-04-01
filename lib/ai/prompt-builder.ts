@@ -74,7 +74,7 @@ function detectSchemaType(contentType: string): string {
     case 'article': return 'article';
     case 'product': return 'product';
     case 'search': return 'search';
-    default: return 'article'; // Default to article extraction
+    default: return 'raw';
   }
 }
 

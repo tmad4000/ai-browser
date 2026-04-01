@@ -19,7 +19,6 @@ import { transformContent } from '../../lib/ai/transform';
 import { getAllPrompts, matchUrlToPrompt } from '../../lib/storage/prompts';
 import { SitePrompt } from '../../types/prompts';
 import { SchemaOutput, FeedSchema, ArticleSchema, ProductSchema, SearchResultsSchema } from '../../types/schemas';
-import { ExtractedContent } from '../../types/ai';
 
 type BrowserState = 'idle' | 'loading' | 'extracting' | 'transforming' | 'ready' | 'error' | 'web';
 

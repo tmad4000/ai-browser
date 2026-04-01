@@ -42,6 +42,13 @@ To learn more about developing your project with Expo, look at the following res
 - [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
 - [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
+## Research
+
+- [Codex research: Defuddle evaluation](./docs/research/2026-03-31-defuddle-evaluation.md)
+- [Codex proposal: extraction strategy](./docs/architecture/extraction-strategy.md)
+- [Codex strategy: v1 support matrix](./docs/strategy/v1-support-matrix.md)
+- [Codex strategy: graph persistence decision](./docs/strategy/graph-persistence-decision.md)
+
 ## Join the community
 
 Join our community of developers creating universal apps.
